@@ -10,7 +10,8 @@
     "test": "jest --coverage --runInBand",
     "db:ping": "node utils/dbPing.js",
     "migrate": "knex migrate:latest",
-    "rollback": "knex migrate:rollback"
+    "rollback": "knex migrate:rollback",
+    "lint": "eslint . --ext .js,.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
