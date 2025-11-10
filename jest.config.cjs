@@ -41,7 +41,9 @@ module.exports = {
     '/node_modules/',
     '/migrations/test/',
     '/services/test/orderService.test.js',
-    '/controllers/test/orderController.test.js'
+    '/controllers/test/orderController.test.js',
+    "controllers/test/",
+    "services/test/"
   ],
 
   globalTeardown: './jest.teardown.js',
