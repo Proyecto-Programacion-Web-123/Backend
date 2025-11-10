@@ -35,5 +35,8 @@ module.exports = {
       branches: 70,
       statements: 75
     }
-  }
+  },
+
+  globalTeardown: './jest.teardown.js',
+  testTimeout: 10000
 };

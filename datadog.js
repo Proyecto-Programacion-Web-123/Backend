@@ -29,3 +29,12 @@ dogstatsd.increment('app.started', 1, ['test:connection']);
 console.log('📊 StatsD client initialized - host: host.docker.internal:8125');
 
 module.exports = { tracer, dogstatsd };
+
+module.exports = {
+  statsd,
+  closeStatsD: () => {
+    return new Promise((resolve) => {
+      statsd.close(() => resolve());
+    });
+  }
+};
