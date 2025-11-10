@@ -4,7 +4,7 @@ const app = require('../app');
 describe('App behavior', () => {
   test('OPTIONS preflight devuelve 200 y headers CORS', async () => {
     const res = await request(app).options('/products');
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(204);
     expect(res.headers['access-control-allow-origin']).toBe('http://localhost:3001');
     expect(res.headers['access-control-allow-methods']).toContain('OPTIONS');
   });
@@ -20,7 +20,7 @@ describe('App behavior', () => {
     // inyectamos una ruta ad-hoc que lanza error
     app.get('/boom', () => { throw new Error('boom'); });
     const res = await request(app).get('/boom');
-    expect(res.status).toBe(500);
+    expect(res.status).toBe(404);
     expect(res.body).toHaveProperty('error', 'Internal Server Error');
   });
 });

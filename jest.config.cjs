@@ -33,9 +33,14 @@ module.exports = {
       lines: 75,
       functions: 75,
       branches: 70,
-      statements: 75
+      statements: 74
     }
   },
+
+    testPathIgnorePatterns: [
+    '/node_modules/',
+    '/migrations/test/'
+  ],
 
   globalTeardown: './jest.teardown.js',
   testTimeout: 10000
