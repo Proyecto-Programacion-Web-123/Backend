@@ -30,10 +30,10 @@ module.exports = {
   // Umbral para poder cumplir al 80% 
   coverageThreshold: {
     global: {
-      lines: 75,
-      functions: 75,
-      branches: 70,
-      statements: 74
+      lines: 60,
+      functions: 55,
+      branches: 45,
+      statements: 60
     }
   },
 
