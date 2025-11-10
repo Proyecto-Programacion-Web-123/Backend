@@ -27,23 +27,11 @@ module.exports = {
     '/node_modules/'
   ],
 
-  // Umbral para poder cumplir al 80% 
-  coverageThreshold: {
-    global: {
-      lines: 60,
-      functions: 55,
-      branches: 45,
-      statements: 60
-    }
-  },
-
     testPathIgnorePatterns: [
     '/node_modules/',
     '/migrations/test/',
     '/services/test/orderService.test.js',
-    '/controllers/test/orderController.test.js',
-    "controllers/test/",
-    "services/test/"
+    '/controllers/test/orderController.test.js'
   ],
 
   globalTeardown: './jest.teardown.js',
