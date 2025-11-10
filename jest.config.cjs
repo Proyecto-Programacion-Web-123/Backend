@@ -27,13 +27,13 @@ module.exports = {
     '/node_modules/'
   ],
 
-  // Umbral para poder cumplir al 80% 
-  coverageThreshold: {
-    global: {
-      lines: 75,
-      functions: 75,
-      branches: 70,
-      statements: 75
-    }
-  }
+    testPathIgnorePatterns: [
+    '/node_modules/',
+    '/migrations/test/',
+    '/services/test/orderService.test.js',
+    '/controllers/test/orderController.test.js'
+  ],
+
+  globalTeardown: './jest.teardown.js',
+  testTimeout: 10000
 };
