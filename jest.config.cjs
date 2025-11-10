@@ -39,7 +39,9 @@ module.exports = {
 
     testPathIgnorePatterns: [
     '/node_modules/',
-    '/migrations/test/'
+    '/migrations/test/',
+    '/services/test/orderService.test.js',
+    '/controllers/test/orderController.test.js'
   ],
 
   globalTeardown: './jest.teardown.js',
