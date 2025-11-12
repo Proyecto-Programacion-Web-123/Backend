@@ -21,7 +21,7 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 /* CORS (multi-origen) */
-const defaultOrigins = ['http://localhost:5173', 'http://localhost:3001'];
+const defaultOrigins = ['http://localhost:5173', 'http://localhost:3001', 'http://localhost:3000'];
 const envOrigins = (process.env.WEB_ORIGIN || '')
   .split(',')
   .map(s => s.trim())
