@@ -1,37 +1,36 @@
-# Backend/docker-compose.yml
 services:
   mysql:
     image: mysql:8.0.37
     container_name: term-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${7465726D696E61}
-      MYSQL_DATABASE: ${term}
+      MYSQL_ROOT_PASSWORD: '7465726D696E61'
+      MYSQL_DATABASE: 'term'
     ports:
-      - "${3307}:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${7465726D696E61}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p7465726D696E61"]
       interval: 10s
       timeout: 5s
       retries: 10
     restart: always
 
-  # ✅ Nuevo: Datadog Agent
   datadog:
     image: datadog/agent:latest
     container_name: datadog-agent
     environment:
-      - DD_API_KEY=${DD_API_KEY}  # Tu API key de Datadog
-      - DD_SITE=datadoghq.com     # O datadoghq.eu si elegiste EU
-      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-      - DD_LOGS_ENABLED=true
+      - DD_API_KEY=${DD_API_KEY}  # ← variables, NO valores literales
+      - DD_SITE=${DD_SITE}
+      - DD_ENV=${NODE_ENV}
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+      - DD_LOGS_ENABLED=false
     ports:
-      - "8125:8125/udp"  # StatsD
-      - "8126:8126/tcp"  # APM
+      - "8125:8125/udp"
+      - "8126:8126/tcp"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro
