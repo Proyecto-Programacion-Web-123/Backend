@@ -81,6 +81,7 @@ module.exports = {
   create,
   update,
   delete: remove,
+  updatePhone,
   // alias esperados por tests de errores
   getUsers: getAll,
   getUserById: getById,
