@@ -16,19 +16,28 @@ const UserService = {
     return new UserDto(user);
   },
 
-  createUser: async (payload = {}) => {
-    const { first_name, last_name, email, password } = payload || {};
-    // Validación estricta: estos tests de ramas esperan este mensaje /required/i
-    if (!first_name || !last_name || !email || !password) {
-      throw new BadRequestError('Name, email, and password are required');
-    }
-    const created = await UserModel.create({ first_name, last_name, email, password });
-    if (!created) {
-      // Rama defensiva (ayuda a branch coverage)
-      throw new NotFoundError('User not created');
-    }
-    return new UserDto(created);
-  },
+createUser: async (payload = {}) => {
+  const { first_name, last_name, email, password, phone } = payload || {};
+  
+  // Validación estricta: estos tests de ramas esperan este mensaje /required/i
+  if (!first_name || !last_name || !email || !password) {
+    throw new BadRequestError('Name, email, and password are required');
+  }
+  
+  const created = await UserModel.createUser({ 
+    first_name, 
+    last_name, 
+    email, 
+    password, 
+    phone // ← Incluir phone si se proporciona
+  });
+  
+  if (!created) {
+    // Rama defensiva (ayuda a branch coverage)
+    throw new NotFoundError('User not created');
+  }
+  return new UserDto(created);
+},
 
   updateUser: async (id, updates = {}) => {
     if (!id) throw new BadRequestError('User ID is required');
@@ -101,6 +110,31 @@ const UserService = {
       return { ok: false };
     }
   },
+
+  updatePhone: async (id, updates = {}) => {
+    if (!id) throw new BadRequestError('User ID is required');
+    
+    const { phone } = updates;
+    
+    // Validar que phone venga en los updates
+    if (phone === undefined) {
+      throw new BadRequestError('Phone field is required');
+    }
+
+    // Validar formato básico de teléfono (opcional)
+    if (phone && typeof phone !== 'string') {
+      throw new BadRequestError('Phone must be a string');
+    }
+
+    // Actualizar solo el campo phone
+    const updateData = { phone };
+    const updated = await UserModel.update(id, updateData);
+    
+    if (!updated) throw new NotFoundError('User not found');
+    return new UserDto(updated);
+  },
+
 };
+
 
 module.exports = UserService;

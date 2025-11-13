@@ -7,5 +7,7 @@ router.get('/:id', UserController.getById);
 router.post('/', UserController.create);
 router.put('/:id', UserController.update);
 router.delete('/:id', UserController.delete);
+router.patch('/:id/phone', usersController.updatePhone);
+
 
 module.exports = router;

@@ -56,6 +56,19 @@ async function updateLastLogin(id_user) {
     .update({ last_login_at: db.fn.now(), updated_at: db.fn.now() });
 }
 
+async function updatePhone(id, phone) {
+  await db('users')
+    .where({ id_user: id })
+    .whereNull('deleted_at')
+    .update({ 
+      phone: phone, 
+      updated_at: db.fn.now() 
+    });
+  
+  return findById(id); // Devuelve el usuario actualizado
+}
+
+
 module.exports = {
   findAll,
   findById,
@@ -63,5 +76,6 @@ module.exports = {
   createUser,
   update,
   delete: remove,     
-  updateLastLogin
+  updateLastLogin,
+  updatePhone
 };

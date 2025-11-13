@@ -6,6 +6,7 @@ class UserDto {
         this.last_name = user.last_name;
         this.second_last_name = user.second_last_name;
         this.email = user.email;
+        this.phone = user.phone || null; 
     }
 
     static map(users) {

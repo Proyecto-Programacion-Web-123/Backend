@@ -58,6 +58,23 @@ async function remove(req, res) {
   }
 }
 
+async function updatePhone(req, res) {
+  try {
+    const { id } = req.params || {};
+    const { phone } = req.body || {};
+    
+    // Validar que phone venga en el body
+    if (phone === undefined) {
+      throw new BadRequestError('Phone field is required');
+    }
+
+    const data = await UserService.updatePhone(id, { phone });
+    return res.status(200).json(data);
+  } catch (err) {
+    return handleError(err, res);
+  }
+}
+
 module.exports = {
   getAll,
   getById,
